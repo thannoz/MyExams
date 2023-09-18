@@ -1,11 +1,17 @@
-import { defineConfig } from "vite";
+import { defineConfig, loadEnv } from "vite";
 import { resolve } from "path";
 import react from "@vitejs/plugin-react";
 
-export default defineConfig((configEnv) => {
-  const isDevelopment = configEnv.mode === "development";
+export default defineConfig(({ command, mode }) => {
+  const isDevelopment = mode === "development";
+  const env = loadEnv(mode, process.cwd(), "");
 
   return {
+    define: {
+      "process.env.VITE_REACT_APP_CLERK_PUBLISHABLE_KEY": JSON.stringify(
+        env.VITE_REACT_APP_CLERK_PUBLISHABLE_KEY
+      ),
+    },
     plugins: [react()],
     resolve: {
       alias: {

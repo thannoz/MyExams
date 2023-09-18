@@ -5,7 +5,6 @@ import {
   RedirectToSignIn,
   SignIn,
   SignUp,
-  UserButton,
 } from "@clerk/clerk-react";
 import {
   BrowserRouter as Router,
@@ -21,7 +20,6 @@ import Forum from "../pages/Forum";
 import "../index.css";
 
 const pubKey = import.meta.env.VITE_REACT_APP_CLERK_PUBLISHABLE_KEY;
-console.log(import.meta.env);
 
 if (!pubKey) {
   throw new Error("Missing Publishable Key");
