@@ -1,11 +1,15 @@
-import { UserButton } from "@clerk/clerk-react";
-import React from "react";
+import { useUser } from "@clerk/clerk-react";
+import { Wrapper } from "components/Wrapper";
+import ForumWrapper from "../components/ForumContent";
+import NavbarHeader from "./NavbarHeader";
+import ForumContent from "../components/ForumContent";
 
 const Forum = () => {
+  const user = useUser();
+
   return (
     <div>
-      <h1>This is the forum page (protected)</h1>
-      <UserButton />
+      <NavbarHeader content={<ForumContent />} />;
     </div>
   );
 };

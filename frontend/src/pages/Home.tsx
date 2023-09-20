@@ -6,26 +6,15 @@ import { UserButton, useClerk, useUser } from "@clerk/clerk-react";
 
 import logo from "../img/logo.png";
 
-// Änderungen:
-// 1. Navi-name "Klasur" zur "Dashboard" ändern
-// 2. Forum-link entfernen, da Forum sich ebenfalls in Dashboard
-// befinden wird
-
 const navigation = [
-  { name: "Klausuren", href: "exams" },
-  { name: "Forum", href: "forum" },
+  { name: "Dashboard", href: "/dashboard" },
+  { name: "Forum", href: "/forum" },
 ];
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { openSignUp, openSignIn } = useClerk();
+  const { openSignIn } = useClerk();
   const user = useUser();
-
-  console.log("User not signed in", user.isSignedIn);
-
-  const openSignUpModal = () => {
-    openSignUp();
-  };
 
   const openSignInModal = () => {
     openSignIn();
@@ -66,9 +55,6 @@ export default function Home() {
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            {/* <button className="btn btn-primary" onClick={openSignUpModal}>
-              Registrieren
-            </button> */}
             {user.isSignedIn && <UserButton afterSignOutUrl="/" />}
           </div>
         </nav>
@@ -107,13 +93,18 @@ export default function Home() {
                     </Link>
                   ))}
                 </div>
+                {/* Userbutton here when user is logged in */}
                 <div className="py-6">
-                  <a
-                    href="#"
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-200"
-                  >
-                    Log in
-                  </a>
+                  {user.isSignedIn ? (
+                    <UserButton />
+                  ) : (
+                    <a
+                      href="#"
+                      className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-200"
+                    >
+                      Log in
+                    </a>
+                  )}
                 </div>
               </div>
             </div>
@@ -136,16 +127,6 @@ export default function Home() {
           />
         </div>
         <div className=" mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
-          {/* Bonus */}
-          {/* <div className=" hidden sm:mb-8 sm:flex sm:justify-center">
-            <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-              Announcing our next round of funding.{" "}
-              <a href="#" className="font-semibold text-indigo-600">
-                <span className="absolute inset-0" aria-hidden="true" />
-                Read more <span aria-hidden="true">&rarr;</span>
-              </a>
-            </div>
-          </div> */}
           <div className="text-center">
             <h1 className="font-opensans text-4xl font-black tracking-tight text-gray-900 sm:text-6xl">
               Verwalte effizient deine Klausurtermine

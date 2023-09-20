@@ -14,10 +14,12 @@ import {
 } from "react-router-dom";
 import "dotenv";
 
-import Exams from "../pages/Exams";
 import Home from "../pages/Home";
 import Forum from "../pages/Forum";
+import Dashboard from "../pages/Dashboard";
 import "../index.css";
+import Messages from "../pages/Messages";
+import Notifications from "../pages/Notifications";
 
 const pubKey = import.meta.env.VITE_REACT_APP_CLERK_PUBLISHABLE_KEY;
 
@@ -41,11 +43,11 @@ const ClerkProviderWithRoutes = () => {
           element={<SignUp routing="path" path="/sign-up" />}
         />
         <Route
-          path="/exams"
+          path="/dashboard"
           element={
             <>
               <SignedIn>
-                <Exams />
+                <Dashboard />
               </SignedIn>
               <SignedOut>
                 <RedirectToSignIn />
@@ -59,6 +61,32 @@ const ClerkProviderWithRoutes = () => {
             <>
               <SignedIn>
                 <Forum />
+              </SignedIn>
+              <SignedOut>
+                <Home />
+              </SignedOut>
+            </>
+          }
+        />
+        <Route
+          path="/message"
+          element={
+            <>
+              <SignedIn>
+                <Messages />
+              </SignedIn>
+              <SignedOut>
+                <Home />
+              </SignedOut>
+            </>
+          }
+        />{" "}
+        <Route
+          path="/notification"
+          element={
+            <>
+              <SignedIn>
+                <Notifications />
               </SignedIn>
               <SignedOut>
                 <Home />
