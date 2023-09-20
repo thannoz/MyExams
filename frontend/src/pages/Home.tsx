@@ -6,6 +6,11 @@ import { UserButton, useClerk, useUser } from "@clerk/clerk-react";
 
 import logo from "../img/logo.png";
 
+// Änderungen:
+// 1. Navi-name "Klasur" zur "Dashboard" ändern
+// 2. Forum-link entfernen, da Forum sich ebenfalls in Dashboard
+// befinden wird
+
 const navigation = [
   { name: "Klausuren", href: "exams" },
   { name: "Forum", href: "forum" },
