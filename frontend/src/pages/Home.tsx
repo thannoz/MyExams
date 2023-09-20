@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
-import { useClerk } from "@clerk/clerk-react";
+import { UserButton, useClerk, useUser } from "@clerk/clerk-react";
 
 import logo from "../img/logo.png";
 
@@ -14,6 +14,9 @@ const navigation = [
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { openSignUp, openSignIn } = useClerk();
+  const user = useUser();
+
+  console.log("User not signed in", user.isSignedIn);
 
   const openSignUpModal = () => {
     openSignUp();
@@ -58,9 +61,10 @@ export default function Home() {
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <button className="btn btn-primary" onClick={openSignUpModal}>
+            {/* <button className="btn btn-primary" onClick={openSignUpModal}>
               Registrieren
-            </button>
+            </button> */}
+            {user.isSignedIn && <UserButton afterSignOutUrl="/" />}
           </div>
         </nav>
         <Dialog
@@ -145,12 +149,14 @@ export default function Home() {
               Effiziente Klausurplanung – Leicht gemacht mit myExams.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
-              <button onClick={openSignUpModal} className="btn btn-primary">
-                Registrieren
-              </button>
-              <button onClick={openSignInModal} className="btn btn-secondary ">
-                Login
-              </button>
+              {user.isSignedIn ? null : (
+                <button
+                  onClick={openSignInModal}
+                  className="btn btn-secondary "
+                >
+                  Anmelden
+                </button>
+              )}
             </div>
           </div>
         </div>
