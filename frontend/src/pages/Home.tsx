@@ -3,6 +3,7 @@ import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 import { useClerk } from "@clerk/clerk-react";
+import { UserButton } from "@clerk/clerk-react";
 
 import logo from "../img/logo.png";
 
@@ -58,9 +59,7 @@ export default function Home() {
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <button className="btn btn-primary" onClick={openSignUpModal}>
-              Registrieren
-            </button>
+            <UserButton />
           </div>
         </nav>
         <Dialog

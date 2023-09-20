@@ -35,7 +35,9 @@ const ClerkProviderWithRoutes = () => {
         <Route
           path="/sign-in/*"
           element={<SignIn routing="path" path="/sign-in" />}
+
         />
+        <Route path="/exams" element={<Exams />} />
         <Route
           path="/sign-up/*"
           element={<SignUp routing="path" path="/sign-up" />}
@@ -48,7 +50,7 @@ const ClerkProviderWithRoutes = () => {
                 <Exams />
               </SignedIn>
               <SignedOut>
-                <RedirectToSignIn />
+                <Home />
               </SignedOut>
             </>
           }
