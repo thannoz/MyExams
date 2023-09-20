@@ -6,11 +6,6 @@ import { Sidebar } from "components/Sidebar";
 
 const Exams = () => {
   return (
-    // <div>
-    //   <h1>This is the exams page (Protected)</h1>
-    //   <UserButton />
-    // </div>
-
     <main className=" flex flex-col flex-grow -ml-64 md:ml-0 transition-all duration-150 ease-in">
       {/* <Navbar /> */}
       <Header />
