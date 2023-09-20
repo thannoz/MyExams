@@ -21,7 +21,7 @@ export default function Home() {
   const { openSignUp, openSignIn } = useClerk();
   const user = useUser();
 
-  console.log("User not signed in", user.isSignedIn);
+  console.log("User role", user.user?.publicMetadata);
 
   const openSignUpModal = () => {
     openSignUp();
