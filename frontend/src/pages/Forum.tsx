@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import DatePicker from 'react-datepicker'; 
@@ -193,6 +194,20 @@ const Forum = () => {
           </div>
         </div>
       </div>
+=======
+import { useUser } from "@clerk/clerk-react";
+import { Wrapper } from "components/Wrapper";
+import ForumWrapper from "../components/ForumContent";
+import NavbarHeader from "./NavbarHeader";
+import ForumContent from "../components/ForumContent";
+
+const Forum = () => {
+  const user = useUser();
+
+  return (
+    <div>
+      <NavbarHeader content={<ForumContent />} />;
+>>>>>>> 7442db54c40f4ec293f853edb92eb774f86f9f9b
     </div>
   );
 };

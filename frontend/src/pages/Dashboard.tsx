@@ -1,20 +1,9 @@
-// Dashboard.js
-
 import React from "react";
-import { SignedIn, UserButton } from "@clerk/clerk-react";
+import NavbarHeader from "./NavbarHeader";
+import { DashboardContent } from "components/DashboardContent";
 
-function Dashboard() {
-  return (
-    <div>
-      <h1>Dashboard</h1>
-      <SignedIn>
-        {/* Display dashboard content only when the user is signed in */}
-        {/* Add your dashboard content here */}
-        <p>Welcome to your dashboard!</p>
-        <UserButton />
-      </SignedIn>
-    </div>
-  );
-}
+const Dashboard = () => {
+  return <NavbarHeader content={<DashboardContent />} />;
+};
 
 export default Dashboard;
