@@ -1,0 +1,23 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("PRISMA_DB_URL")
+  relationMode = "prisma"
+}
+
+model Exam {
+  id String @id @default(cuid())
+  clerkUserID String
+  subject String
+  grade String
+  examDate String
+  examTime String
+  topic String
+  createdAt String
+}

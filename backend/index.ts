@@ -4,25 +4,23 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import mysql from "mysql2";
 
-import { examsRouter } from "./src/exams/exams.router";
-
-const app: Express = express();
+import { examsRouter } from "./src/exams/routes/exam.routes";
 dotenv.config();
+
+const port = process.env.PORT;
+const app: Express = express();
 
 app.use(bodyParser.json());
 app.use(cors());
 
-const port = process.env.PORT;
-
-app.listen(port, () => {
-  console.log("Server running on port " + port);
-});
+app.use(examsRouter);
 
 // DB connection
-// Create the connection to the database
 const connection = mysql.createConnection(process.env.DATABASE_URL!);
 console.log("Connected to PlanetScale Database!");
 
 connection.end();
 
-app.use(examsRouter);
+app.listen(port, () => {
+  console.log("Server running on port " + port);
+});

@@ -12,6 +12,7 @@ import {
   Route,
   useNavigate,
 } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "dotenv";
 
 import Home from "../pages/Home";
@@ -21,6 +22,7 @@ import "../index.css";
 import Messages from "../pages/Messages";
 import Notifications from "../pages/Notifications";
 
+const queryClient = new QueryClient();
 const pubKey = import.meta.env.VITE_REACT_APP_CLERK_PUBLISHABLE_KEY;
 
 if (!pubKey) {
@@ -36,7 +38,13 @@ const ClerkProviderWithRoutes = () => {
         <Route path="/" element={<Home />} />
         <Route
           path="/sign-in/*"
-          element={<SignIn routing="path" path="/sign-in" />}
+          element={
+            <SignIn
+              afterSignInUrl="/dashboard"
+              routing="path"
+              path="/sign-in"
+            />
+          }
         />
         <Route
           path="/sign-up/*"
@@ -51,6 +59,7 @@ const ClerkProviderWithRoutes = () => {
               </SignedIn>
               <SignedOut>
                 <RedirectToSignIn />
+                <Dashboard />
               </SignedOut>
             </>
           }
@@ -63,7 +72,7 @@ const ClerkProviderWithRoutes = () => {
                 <Forum />
               </SignedIn>
               <SignedOut>
-                <Home />
+                <RedirectToSignIn />
               </SignedOut>
             </>
           }
@@ -101,9 +110,11 @@ const ClerkProviderWithRoutes = () => {
 
 const App = (): JSX.Element => {
   return (
-    <Router>
-      <ClerkProviderWithRoutes />
-    </Router>
+    <QueryClientProvider client={queryClient}>
+      <Router>
+        <ClerkProviderWithRoutes />
+      </Router>
+    </QueryClientProvider>
   );
 };
 
