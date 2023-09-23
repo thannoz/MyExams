@@ -6,10 +6,7 @@ import { UserButton, useClerk, useUser } from "@clerk/clerk-react";
 
 import logo from "../img/logo.png";
 
-const navigation = [
-  { name: "Dashboard", href: "/dashboard" },
-  { name: "Forum", href: "/forum" },
-];
+const navigation = [{ name: "Dashboard", href: "/dashboard" }];
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

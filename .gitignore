@@ -2,4 +2,6 @@ node_modules
 .idea
 dist
 .env
+frontend/.env
 frontend/chat.txt
+backend/.env
