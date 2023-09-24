@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { UserButton, useUser } from "@clerk/clerk-react";
 import { Menu } from "lucide-react";
+import { Link } from "react-router-dom";
 
 import logo from "../img/logo.png";
-import { Link } from "react-router-dom";
-import { NavRoutes } from "../components/NavHeader/helpers/NavRoutes";
+import { NavRoutes } from "./helpers/NavRoutes";
 
 interface NavBarHeaderProps {
   content: React.ReactNode;

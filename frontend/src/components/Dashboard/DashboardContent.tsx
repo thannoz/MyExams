@@ -1,9 +1,9 @@
 import React from "react";
 import { useUser } from "@clerk/clerk-react";
 
-import { Teacher } from "./Teacher";
-import { Student } from "./Student";
-import { UnknownUser } from "./UnknownUser";
+import { Teacher } from "../Teacher/Teacher";
+import { Student } from "../Student/Student";
+import { UnknownUser } from "../UnknowUser/UnknownUser";
 
 export const DashboardContent = () => {
   const user = useUser();

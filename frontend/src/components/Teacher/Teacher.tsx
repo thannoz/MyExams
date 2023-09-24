@@ -1,5 +1,5 @@
 import React from "react";
-import { CreateExamForm } from "./CreateExamForm/createExamForm";
+import { CreateExamForm } from "../CreateExamForm/createExamForm";
 import { useUser, useClerk, useAuth } from "@clerk/clerk-react";
 
 export const Teacher = () => {

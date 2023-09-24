@@ -1,7 +1,7 @@
 import { useUser } from "@clerk/clerk-react";
-import ForumWrapper from "../components/ForumContent";
+import ForumWrapper from "../components/Forum/ForumContent";
 import NavbarHeader from "./NavbarHeader";
-import ForumContent from "../components/ForumContent";
+import ForumContent from "../components/Forum/ForumContent";
 
 const Forum = () => {
   const user = useUser();
