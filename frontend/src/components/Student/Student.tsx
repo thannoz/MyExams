@@ -1,5 +1,6 @@
 import React from "react";
 import { useUser } from "@clerk/clerk-react";
+import ExamArea from "components/ExamArea/examArea";
 
 export const Student = () => {
   const user = useUser();
@@ -9,6 +10,7 @@ export const Student = () => {
       {/* Left side content */}
       <div className="bg-slate-300 border rounded col-span-6 md:col-span-6 p-4">
         The list of the current exams
+        <ExamArea />
       </div>
 
       {/* Right side content */}
