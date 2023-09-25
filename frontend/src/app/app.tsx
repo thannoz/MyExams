@@ -38,6 +38,7 @@ const ClerkProviderWithRoutes = () => {
         headerSubtitle: "header-subtitle",
         formFieldLabel: "email-form-field",
         dividerText: "divider-text"
+        
   }
   }}publishableKey={pubKey} navigate={(to) => navigate(to)}>
       <Routes>
