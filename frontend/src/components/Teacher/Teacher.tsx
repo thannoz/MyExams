@@ -1,9 +1,13 @@
-import React from "react";
+import React, { FC } from "react";
 import { CreateExamForm } from "../CreateExamForm/createExamForm";
 import { useUser, useClerk, useAuth } from "@clerk/clerk-react";
 import ExamArea from "components/ExamArea/examArea";
 
-export const Teacher = () => {
+interface SearchProps {
+  searchValue: string;
+}
+
+export const Teacher: FC<SearchProps> = ({ searchValue }) => {
   // const client = await clerkClient.clients.getClient(clientId);
   const user = useUser();
   const { userId } = useAuth();
@@ -14,7 +18,7 @@ export const Teacher = () => {
     <div className="w-full grid grid-cols-6 md:grid-cols-10 gap-4">
       {/* Left side content */}
       <div className="bg-slate-300 border rounded col-span-6 md:col-span-6 p-4">
-        <ExamArea />
+        <ExamArea searchValue={searchValue} />
       </div>
 
       {/* Right side content */}

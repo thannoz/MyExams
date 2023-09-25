@@ -61,6 +61,7 @@ export const CreateExamForm: FC = (): ReactElement => {
       examUpdatedContext.toggle();
     }
 
+    // This time out is for the alert message to be shown
     const successTimeout = setTimeout(() => {
       setShowSuccess(false);
     }, 5000);

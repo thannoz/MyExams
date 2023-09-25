@@ -11,9 +11,13 @@ import {
   extractTimePortion,
 } from "./helpers/extractTimePortion";
 import { StatusChangeContext } from "../../context";
+import { orderExams } from "components/CreateExamForm/helpers/orderExams";
 // import { IUpdateTask } from "../task/interfaces/IUpdateTask";
+interface SearchProps {
+  searchValue: string;
+}
 
-const ExamArea: FC = (): ReactElement => {
+const ExamArea: FC<SearchProps> = ({ searchValue }): ReactElement => {
   const taskUpdatedContext = useContext(StatusChangeContext);
   const { error, isLoading, data, refetch } = useQuery(["exams"], async () => {
     console.log("Data from api:", data);
@@ -22,6 +26,10 @@ const ExamArea: FC = (): ReactElement => {
       "GET"
     );
   });
+  const orderedExams = data?.sort(orderExams);
+  const filteredExams = orderedExams?.filter((exam) =>
+    exam.subject.toLowerCase().includes(searchValue.toLowerCase())
+  );
 
   // update task mutation
   //   const updateTaskMutation = useMutation((data: IUpdateTask) =>
@@ -77,31 +85,48 @@ const ExamArea: FC = (): ReactElement => {
           )}
         </>
         {/* Exam component belongs here */}
-        {isLoading ? (
-          <LinearProgress />
-        ) : (
-          Array.isArray(data) &&
-          data.length > 0 &&
-          data.map((d, idx) => (
-            <Exam
-              id={d.id}
-              key={idx + d.clerkUserID}
-              grade={d.grade}
-              subject={d.subject}
-              topic={d.topic}
-              examDate={extractDatePortion(d.examDate)}
-              examTime={extractTimePortion(d.examTime)}
-              onClick={function (
-                e:
-                  | React.MouseEvent<HTMLButtonElement, MouseEvent>
-                  | React.MouseEvent<HTMLAnchorElement, MouseEvent>,
-                id: string
-              ): void {
-                throw new Error("Function not implemented.");
-              }}
-            />
-          ))
-        )}
+        {isLoading && <LinearProgress />}
+        {searchValue
+          ? filteredExams?.map((fe, idx) => (
+              <Exam
+                id={fe.id}
+                key={idx + fe.clerkUserID}
+                grade={fe.grade}
+                subject={fe.subject}
+                topic={fe.topic}
+                examDate={extractDatePortion(fe.examDate)}
+                examTime={extractTimePortion(fe.examTime)}
+                onClick={function (
+                  e:
+                    | React.MouseEvent<HTMLButtonElement, MouseEvent>
+                    | React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+                  id: string
+                ): void {
+                  throw new Error("Function not implemented.");
+                }}
+              />
+            ))
+          : Array.isArray(orderedExams) &&
+            orderedExams.length > 0 &&
+            orderedExams.map((d, idx) => (
+              <Exam
+                id={d.id}
+                key={idx + d.clerkUserID}
+                grade={d.grade}
+                subject={d.subject}
+                topic={d.topic}
+                examDate={extractDatePortion(d.examDate)}
+                examTime={extractTimePortion(d.examTime)}
+                onClick={function (
+                  e:
+                    | React.MouseEvent<HTMLButtonElement, MouseEvent>
+                    | React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+                  id: string
+                ): void {
+                  throw new Error("Function not implemented.");
+                }}
+              />
+            ))}
       </Grid>
     </Grid>
   );
