@@ -1,10 +1,10 @@
-import { useUser } from "@clerk/clerk-react";
+import { UserButton } from "@clerk/clerk-react";
+import React from "react";
 import NavbarHeader from "./NavbarHeader";
 import ForumContent from "../components/Forum/ForumContent";
 
-const Forum = () => {
-  const user = useUser();
 
+const Forum = () => {
   return (
     <div>
       <NavbarHeader content={<ForumContent />} />;
@@ -13,3 +13,4 @@ const Forum = () => {
 };
 
 export default Forum;
+
