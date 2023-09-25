@@ -6,5 +6,5 @@ export const examsRouter: Router = Router();
 
 examsRouter.get("/exams", examController.getAll);
 examsRouter.post("/exams", examController.create);
-examsRouter.put("/exams", examController.update);
+examsRouter.put("/exams/", examController.update);
 examsRouter.delete("/exams", examController.remove);

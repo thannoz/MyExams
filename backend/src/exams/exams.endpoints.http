@@ -1,2 +1,9 @@
 GET http://localhost:3200/exams
 Content-Type: application/json
+
+PUT http://localhost:3200/exams
+Content-Type: application/json
+
+DELETE http://localhost:3200/exams
+Content-Type: application/json
+

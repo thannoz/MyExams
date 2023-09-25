@@ -10,10 +10,7 @@ import {
   extractDatePortion,
   extractTimePortion,
 } from "./helpers/extractTimePortion";
-// import { ITaskApi } from "./interfaces/ITaskApi";
-// import { Status } from "../createTaskForm/enums/Status";
 // import { IUpdateTask } from "../task/interfaces/IUpdateTask";
-// import { countTasks } from "./helpers/countTasks";
 // import { TaskCounterStatus } from "../taskCounter/interfaces/ITaskCounter";
 // import { StatusChangeContext } from "../../context";
 
@@ -29,7 +26,7 @@ const ExamArea: FC = (): ReactElement => {
 
   // update task mutation
   //   const updateTaskMutation = useMutation((data: IUpdateTask) =>
-  //     sendApiRequest<IUpdateTask>("http://localhost:3200/tasks", "PUT", data)
+  //     sendApiRequest<IUpdateTask>("http://localhost:3200/exams", "PUT", data)
   //   );
 
   useEffect(() => {
@@ -38,8 +35,7 @@ const ExamArea: FC = (): ReactElement => {
   }, []);
   //   }, [taskUpdatedContext.updated]);
 
-  /*This usseEffect update if a task changes i.e. marked as 'completed'
-    or set to 'inProgress'
+  /*This usseEffect updates if an exam has been created.'
     When this happens, the useEffect above fires to refetch 
     the current state from the DB.
    */
@@ -78,7 +74,7 @@ const ExamArea: FC = (): ReactElement => {
         <>
           {error && (
             <Alert severity="error">
-              Error occured while fetching your tasks.
+              Error occured while fetching your exams.
             </Alert>
           )}
         </>
