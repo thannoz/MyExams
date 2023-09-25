@@ -77,6 +77,7 @@ export const CreateExamForm: FC = (): ReactElement => {
       flexDirection="column"
       alignItems="flex-start"
       width="100%"
+      height="100%"
       px={4}
       my={6}
     >

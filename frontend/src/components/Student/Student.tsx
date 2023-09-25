@@ -11,14 +11,14 @@ export const Student: FC<SearchProps> = ({ searchValue }) => {
   return (
     <div className="w-full grid grid-cols-6 md:grid-cols-10 gap-4">
       {/* Left side content */}
-      <div className="bg-slate-300 border rounded col-span-6 md:col-span-6 p-4">
+      <div className="bg-slate-300 border rounded shadow-2xl col-span-6 md:col-span-6 p-4">
         <ExamArea searchValue={searchValue} />
       </div>
 
       {/* Right side content */}
-      <div className=" col-span-4 md:col-span-4 p-4">
+      <div className="border rounded shadow-2xl col-span-4 md:col-span-4 p-4">
         <h2 className="text-start text-2xl px-4 py-7 leading-5">
-          Student Profile
+          Schüler Profil
         </h2>
         {/* Create a custom user Profile */}
         Custom user profile will be rendered here
