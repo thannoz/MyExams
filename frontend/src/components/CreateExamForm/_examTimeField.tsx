@@ -1,9 +1,8 @@
 import React, { FC, ReactElement } from "react";
 import { LocalizationProvider, MobileTimePicker } from "@mui/x-date-pickers";
-import PropTypes from "prop-types";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import dayjs, { Dayjs } from "dayjs";
+import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 
@@ -36,12 +35,6 @@ const ExamTimeField: FC<ITimeField> = (props): ReactElement => {
       </LocalizationProvider>
     </>
   );
-};
-
-ExamTimeField.propTypes = {
-  value: PropTypes.instanceOf(Dayjs),
-  disabled: PropTypes.bool,
-  onChange: PropTypes.func,
 };
 
 export default ExamTimeField;

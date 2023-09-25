@@ -10,7 +10,7 @@ import { useMutation } from "@tanstack/react-query";
 import { ICreateExam } from "./interfaces/ICreateExam";
 import { sendApiRequest } from "./../../helpers/sendApiRequest";
 import { Box, Button, Stack } from "@mui/material";
-import dayjs, { Dayjs } from "dayjs";
+import { Dayjs } from "dayjs";
 
 import { Grades } from "./enums/grades";
 import { Subjects } from "./enums/Subjects";
@@ -18,6 +18,7 @@ import ExamSelectField from "./_examSelectField";
 import ExamTopicField from "./_examTopicField";
 import ExamDateField from "./_examDateField";
 import ExamTimeField from "./_examTimeField";
+import { StatusChangeContext } from "../../context";
 
 export const CreateExamForm: FC = (): ReactElement => {
   const [subject, setSubject] = useState<string>(Subjects.LF12);
@@ -25,8 +26,9 @@ export const CreateExamForm: FC = (): ReactElement => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [selectedTime, setSelectedTime] = React.useState<Dayjs | null>();
   const [topic, setTopic] = useState<string>("");
-
   const [showSuccess, setShowSuccess] = useState<boolean>(false);
+
+  const examUpdatedContext = useContext(StatusChangeContext);
   const teacher = useUser();
 
   // Änderung der port wenn APIs gebaut werden
@@ -56,7 +58,7 @@ export const CreateExamForm: FC = (): ReactElement => {
   useEffect(() => {
     if (createExamMutation.isSuccess) {
       setShowSuccess(true);
-      //taskUpdatedContext.toggle();
+      examUpdatedContext.toggle();
     }
 
     const successTimeout = setTimeout(() => {

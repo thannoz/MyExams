@@ -1,5 +1,4 @@
 import React, { FC, ReactElement } from "react";
-import PropTypes from "prop-types";
 import {
   FormControl,
   InputLabel,
@@ -40,19 +39,6 @@ const ExamSelectField: FC<ISelectField> = (props): ReactElement => {
       </Select>
     </FormControl>
   );
-};
-
-ExamSelectField.propTypes = {
-  onChange: PropTypes.func,
-  label: PropTypes.string,
-  name: PropTypes.string,
-  disabled: PropTypes.bool,
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      value: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired,
-    }).isRequired
-  ),
 };
 
 export default ExamSelectField;

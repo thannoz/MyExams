@@ -1,4 +1,4 @@
-// Unterrichitsblock (Brauchen wir die unbedingt?)
+// Unterrichtsblöcken (Brauchen wir die unbedingt?)
 export enum BlockLesson {
   First = "1.",
   Second = "2.",

@@ -10,12 +10,11 @@ import {
   extractDatePortion,
   extractTimePortion,
 } from "./helpers/extractTimePortion";
+import { StatusChangeContext } from "../../context";
 // import { IUpdateTask } from "../task/interfaces/IUpdateTask";
-// import { TaskCounterStatus } from "../taskCounter/interfaces/ITaskCounter";
-// import { StatusChangeContext } from "../../context";
 
 const ExamArea: FC = (): ReactElement => {
-  //   const taskUpdatedContext = useContext(StatusChangeContext);
+  const taskUpdatedContext = useContext(StatusChangeContext);
   const { error, isLoading, data, refetch } = useQuery(["exams"], async () => {
     console.log("Data from api:", data);
     return await sendApiRequest<IExamAPI[]>(
@@ -32,8 +31,7 @@ const ExamArea: FC = (): ReactElement => {
   useEffect(() => {
     refetch();
     console.log("refected data from DB");
-  }, []);
-  //   }, [taskUpdatedContext.updated]);
+  }, [taskUpdatedContext.updated]);
 
   /*This usseEffect updates if an exam has been created.'
     When this happens, the useEffect above fires to refetch 

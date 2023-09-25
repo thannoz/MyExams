@@ -21,6 +21,8 @@ import Dashboard from "../pages/Dashboard";
 import "../index.css";
 import Messages from "../pages/Messages";
 import Notifications from "../pages/Notifications";
+import ComposeContext from "../context/Compose.context";
+import { rootContext } from "../context/root.context";
 
 const queryClient = new QueryClient();
 const pubKey = import.meta.env.VITE_REACT_APP_CLERK_PUBLISHABLE_KEY;
@@ -111,9 +113,11 @@ const ClerkProviderWithRoutes = () => {
 const App = (): JSX.Element => {
   return (
     <QueryClientProvider client={queryClient}>
-      <Router>
-        <ClerkProviderWithRoutes />
-      </Router>
+      <ComposeContext components={rootContext}>
+        <Router>
+          <ClerkProviderWithRoutes />
+        </Router>
+      </ComposeContext>
     </QueryClientProvider>
   );
 };
