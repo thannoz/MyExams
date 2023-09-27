@@ -4,6 +4,27 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 class ExamController {
+  public async getAllGrades(req: Request, res: Response): Promise<Response> {
+    try {
+      const grades = await prisma.grade.findMany();
+      return res.status(200).json(grades);
+    } catch (error) {
+      console.error("Error loading grades records:", error);
+      return res.status(500).json({ error: "Fehler beim Laden der Klassen!" });
+    }
+  }
+
+  public async getAllSubjects(req: Request, res: Response): Promise<Response> {
+    try {
+      const subjects = await prisma.subject.findMany();
+      // console.log("subjects", subjects);
+      return res.status(200).json(subjects);
+    } catch (error) {
+      console.error("Error loading subjects records:", error);
+      return res.status(500).json({ error: "Fehler beim Laden der Fächer!" });
+    }
+  }
+
   public async getAll(req: Request, res: Response): Promise<Response> {
     try {
       const allExams = await prisma.exam.findMany();

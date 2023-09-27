@@ -18,3 +18,13 @@ model Exam {
   topic String
   createdAt String
 }
+
+model Subject {
+  id String @id @default(cuid())
+  name String
+}
+
+model Grade {
+  id String @id @default(cuid())
+  name String
+}

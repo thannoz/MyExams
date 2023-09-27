@@ -7,7 +7,8 @@ import { ExamFooter } from "./_examFooter";
 import { IExam } from "./interfaces/IExam";
 
 export const Exam: FC<IExam> = (props): ReactElement => {
-  console.log("props in Exam:", props);
+  // console.log("props in Exam:", props);
+  // send onChange event here
   const {
     subject = "Test subject",
     grade = "Test grade",

@@ -5,6 +5,7 @@ import bodyParser from "body-parser";
 import mysql from "mysql2";
 
 import { examsRouter } from "./src/exams/routes/exam.routes";
+// import { examController } from "./src/exams/controller/exam.controller";
 dotenv.config();
 
 const port = process.env.PORT;
@@ -14,6 +15,8 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use(examsRouter);
+
+// examController.createGrades();
 
 // DB connection
 const connection = mysql.createConnection(process.env.DATABASE_URL!);

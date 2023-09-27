@@ -14,7 +14,7 @@ const ExamSelectField: FC<ISelectField> = (props): ReactElement => {
     name = "",
     label = "",
     value = "",
-    items = [{ value: "", label: "Add Items1" }],
+    items = [],
     disabled = false,
     onChange = (e: SelectChangeEvent) => console.log(e),
   } = props;
@@ -32,8 +32,8 @@ const ExamSelectField: FC<ISelectField> = (props): ReactElement => {
         disabled={disabled}
       >
         {items.map((item, idx) => (
-          <MenuItem key={item.value + idx} value={item.value}>
-            {item.label}
+          <MenuItem key={item.id! + idx} value={item.name}>
+            {item.name}
           </MenuItem>
         ))}
       </Select>

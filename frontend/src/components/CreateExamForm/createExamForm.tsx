@@ -6,7 +6,7 @@ import React, {
   useContext,
 } from "react";
 import { useUser } from "@clerk/clerk-react";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { ICreateExam } from "./interfaces/ICreateExam";
 import { sendApiRequest } from "./../../helpers/sendApiRequest";
 import { Box, Button, Stack } from "@mui/material";
@@ -23,9 +23,12 @@ import {
   IUpdateAPI,
   IUpdateExam,
 } from "components/Exam/interfaces/IUpdateExam";
+import { ILoadSubjects } from "./interfaces/ILoadSubjetc";
 
 export const CreateExamForm: FC = (): ReactElement => {
   const [subject, setSubject] = useState<string>("");
+  const [id, setId] = useState<string>("");
+  const [subjects, setSubjects] = useState<string>("");
   const [grade, setGrade] = useState<string>("");
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<Dayjs | null>(null);
@@ -34,6 +37,24 @@ export const CreateExamForm: FC = (): ReactElement => {
 
   const examUpdatedContext = useContext(StatusChangeContext);
   const teacher = useUser();
+
+  // load subjects mutation (this function loads subjects from the api)
+  const { data: subjectData } = useQuery(["subjects"], async () => {
+    // console.log("Data from api:", data);
+    return await sendApiRequest<ILoadSubjects[]>(
+      "http://localhost:3200/exams/subjects",
+      "GET"
+    );
+  });
+
+  // load grades mutation (this function loads grades from the api)
+  const { data: gradesData } = useQuery(["grades"], async () => {
+    // console.log("Data from api:", data);
+    return await sendApiRequest<ILoadSubjects[]>(
+      "http://localhost:3200/exams/grades",
+      "GET"
+    );
+  });
 
   // create exam mutation
   const createExamMutation = useMutation((data: ICreateExam) =>
@@ -125,24 +146,7 @@ export const CreateExamForm: FC = (): ReactElement => {
             name="Fach"
             value={subject}
             onChange={(e) => setSubject(e.target.value as string)}
-            items={[
-              { value: Subjects.Englisch, label: Subjects.Englisch },
-              { value: Subjects.Deutsch, label: Subjects.Deutsch },
-              { value: Subjects.Ethik, label: Subjects.Ethik },
-              { value: Subjects.PoWi, label: Subjects.PoWi },
-              { value: Subjects.LF1, label: Subjects.LF1 },
-              { value: Subjects.LF2, label: Subjects.LF2 },
-              { value: Subjects.LF3, label: Subjects.LF3 },
-              { value: Subjects.LF4, label: Subjects.LF4 },
-              { value: Subjects.LF5, label: Subjects.LF5 },
-              { value: Subjects.LF6, label: Subjects.LF6 },
-              { value: Subjects.LF7, label: Subjects.LF7 },
-              { value: Subjects.LF8, label: Subjects.LF8 },
-              { value: Subjects.LF9, label: Subjects.LF9 },
-              { value: Subjects.LF10, label: Subjects.LF10 },
-              { value: Subjects.LF11, label: Subjects.LF11 },
-              { value: Subjects.LF12, label: Subjects.LF12 },
-            ]}
+            items={subjectData}
           />
           <ExamSelectField
             disabled={createExamMutation.isLoading}
@@ -150,14 +154,7 @@ export const CreateExamForm: FC = (): ReactElement => {
             name="Klasse"
             value={grade}
             onChange={(e) => setGrade(e.target.value as string)}
-            items={[
-              { value: Grades._12ITA, label: Grades._12ITA },
-              { value: Grades._11ITA, label: Grades._11ITA },
-              { value: Grades._10ITA, label: Grades._10ITA },
-              { value: Grades._12ITC, label: Grades._12ITC },
-              { value: Grades._11ITC, label: Grades._11ITC },
-              { value: Grades._10ITC, label: Grades._10ITC },
-            ]}
+            items={gradesData}
           />
         </Stack>
         {/* Time and Date field belong here */}

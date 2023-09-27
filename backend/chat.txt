@@ -1,7 +1,2 @@
-/*
-planetscale db creds:
-username: 1rtzbfx5n8vrgfeqy8t9
-password: pscale_pw_IJO7Hs4FEsBKfjZZFfZWstpr58Yt4ABBR0M1hNCcfVe
-*/
 
 
