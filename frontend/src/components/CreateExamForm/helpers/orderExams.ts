@@ -1,3 +1,4 @@
+import { ICreateExam } from "../interfaces/ICreateExam";
 import { IExamAPI } from "./../../ExamArea/interfaces/IExamAPI";
 export const orderExams = (a: IExamAPI, b: IExamAPI): number => {
   const dateA = new Date(a.examDate);
@@ -24,4 +25,25 @@ export const orderExams = (a: IExamAPI, b: IExamAPI): number => {
   }
 
   return 0;
+};
+
+export const updateExamRequest = async (
+  id: string,
+  updatedData: ICreateExam
+) => {
+  const url = `http://localhost:3200/exams/${id}`;
+  try {
+    const res = await fetch(url, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updatedData),
+    });
+    if (!res.ok) {
+      throw new Error("Update request failed");
+    }
+    const updatedExam = await res.json();
+    return updatedExam;
+  } catch (error) {
+    console.error("Error updating resource: " + error);
+  }
 };

@@ -1,39 +1,73 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
-import { validationResult } from "express-validator";
 
 const prisma = new PrismaClient();
 
 class ExamController {
   public async getAll(req: Request, res: Response): Promise<Response> {
-    // ggf. validieren?
-    const allExams = await prisma.exam.findMany();
-
-    console.log("exams: ", allExams);
-
-    return res.json(allExams).status(200);
+    try {
+      const allExams = await prisma.exam.findMany();
+      return res.status(200).json(allExams);
+    } catch (error) {
+      console.error("Error fetching exams:", error);
+      return res
+        .status(500)
+        .json({ error: "Fehler beim Laden der Klausuren!" });
+    }
   }
 
   public async create(req: Request, res: Response): Promise<Response> {
-    // ggf. validieren?
-    console.log("client request: ", req.body);
-    const errs = validationResult(req.body);
     try {
       const exam = await prisma.exam.create({ data: req.body });
-      return res.json(exam);
+      return res.status(201).json(exam);
     } catch (error) {
-      return res.status(400).json({ error: errs.array() });
+      console.error("Error creating exam:", error);
+      return res
+        .status(500)
+        .json({ error: "Fehler beim Erstellen einer Klausur!" });
     }
   }
 
   public async update(req: Request, res: Response): Promise<Response> {
-    // ggf. validieren?
-    return res.json({ hello: "updated an exam" });
+    const id = req.params.id;
+    console.log(`Updating ${id}`);
+
+    const { subject, grade, examDate, examTime, topic } = req.body;
+    try {
+      const updatedExam = await prisma.exam.update({
+        where: { id: id },
+        data: {
+          subject,
+          grade,
+          examDate,
+          examTime,
+          topic,
+        },
+      });
+
+      return res.status(200).json(updatedExam);
+    } catch (error) {
+      console.error("Error updating exam:", error);
+      return res
+        .status(500)
+        .json({ error: "Fehler beim Aktualisieren der Klausur" });
+    }
   }
 
   public async remove(req: Request, res: Response): Promise<Response> {
-    // ggf. validieren?
-    return res.json({ hello: "delete an exam" });
+    const id = req.params.id;
+    console.log(`Removing ${id}`);
+    try {
+      const deletedExam = await prisma.exam.delete({
+        where: { id: id },
+      });
+      return res.status(200).json({ Gelöscht: deletedExam.subject });
+    } catch (error) {
+      console.error("Error deleting exam:", error);
+      return res
+        .status(500)
+        .json({ error: "Fehler beim Löschen eines Eintrags" });
+    }
   }
 }
 

@@ -19,23 +19,37 @@ import ExamTopicField from "./_examTopicField";
 import ExamDateField from "./_examDateField";
 import ExamTimeField from "./_examTimeField";
 import { StatusChangeContext } from "../../context";
+import {
+  IUpdateAPI,
+  IUpdateExam,
+} from "components/Exam/interfaces/IUpdateExam";
 
 export const CreateExamForm: FC = (): ReactElement => {
-  const [subject, setSubject] = useState<string>(Subjects.LF12);
-  const [grade, setGrade] = useState<string>(Grades._12ITA);
-  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
-  const [selectedTime, setSelectedTime] = React.useState<Dayjs | null>();
+  const [subject, setSubject] = useState<string>("");
+  const [grade, setGrade] = useState<string>("");
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [selectedTime, setSelectedTime] = useState<Dayjs | null>(null);
   const [topic, setTopic] = useState<string>("");
   const [showSuccess, setShowSuccess] = useState<boolean>(false);
 
   const examUpdatedContext = useContext(StatusChangeContext);
   const teacher = useUser();
 
-  // Änderung der port wenn APIs gebaut werden
+  // create exam mutation
   const createExamMutation = useMutation((data: ICreateExam) =>
     sendApiRequest<ICreateExam>("http://localhost:3200/exams", "POST", data)
   );
 
+  //update exam mutation
+  const updateExamMutation = useMutation((updateData: IUpdateAPI) =>
+    sendApiRequest(
+      `http://localhost:3200/exams/${updateData.id}`,
+      "PUT",
+      updateData
+    )
+  );
+
+  // create a new exam handler
   const createExamHandler = () => {
     if (!subject || !grade || !selectedDate || !selectedTime) {
       return;
@@ -53,6 +67,28 @@ export const CreateExamForm: FC = (): ReactElement => {
 
     createExamMutation.mutate(exam);
     console.log("The created exam: ", exam);
+    setSubject("");
+    setGrade("");
+    setSelectedDate(null);
+    setSelectedTime(null);
+    setTopic("");
+  };
+
+  const updateExamHandler = () => {
+    const exam: ICreateExam = {
+      clerkUserID: teacher.user?.id!,
+      subject,
+      grade,
+      examDate: String(selectedDate),
+      examTime: String(selectedTime),
+      topic,
+      createdAt: new Date().toString(),
+    };
+    console.log("obj to update: ", exam);
+    updateExamMutation.mutate({
+      ...exam,
+      id: "",
+    });
   };
 
   useEffect(() => {

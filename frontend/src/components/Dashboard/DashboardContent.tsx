@@ -16,10 +16,10 @@ interface SearchProps {
 export const DashboardContent: FC<SearchProps> = ({ searchInput }) => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   searchInput = searchQuery;
-  const taskUpdatedContext = useContext(StatusChangeContext);
+  const examUpdatedContext = useContext(StatusChangeContext);
   const user = useUser();
   const { error, isLoading, data, refetch } = useQuery(["exams"], async () => {
-    console.log("Data from api:", data);
+    // console.log("Data from api:", data);
     return await sendApiRequest<IExamAPI[]>(
       "http://localhost:3200/exams",
       "GET"
@@ -28,7 +28,7 @@ export const DashboardContent: FC<SearchProps> = ({ searchInput }) => {
 
   useEffect(() => {
     refetch();
-  }, [taskUpdatedContext.updated]);
+  }, [examUpdatedContext.updated]);
 
   return (
     <div className="bg-slate-300 flex-1 p-4 w-full md:w-1/2">

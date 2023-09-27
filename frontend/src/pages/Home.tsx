@@ -45,7 +45,7 @@ export default function Home() {
               <Link
                 key={item.name}
                 to={item.href}
-                className="font-lato text-sm font-semibold leading-6 text-gray-900"
+                className="font-lato text-3xl font-semibold leading-6 text-gray-900"
               >
                 {item.name}
               </Link>

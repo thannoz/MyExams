@@ -30,6 +30,6 @@ export const sendApiRequest = async <T>(
     const message = `An error has occurred ${response.status}`;
     throw new Error(message);
   }
-
+  console.log("the url: " + url);
   return (await response.json()) as Promise<T>;
 };
