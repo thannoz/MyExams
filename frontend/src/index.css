@@ -15,6 +15,41 @@
   .btn-secondary {
     @apply bg-gray-500 hover:bg-gray-700 active:bg-gray-400 border border-white;
   }
+
+  .btn-secondary:active,
+  .btn-secondary:focus{
+    outline: none;
+  }
+
+  .btn-login{
+    background-color: rgb(107 114 128);
+    border: none;
+    font-family: "Lato", sans-serif;
+   }
+
+  .btn-login:hover{
+    background-color:  #4A5568;
+  }
+
+  .hide-footer{
+    display: none;
+  }
+
+  .header-title{
+    font-family: "Lato", sans-serif;
+  }
+
+  .header-subtitle{
+    font-family: "Lato", sans-serif;
+  }
+
+  .email-form-field{
+    font-family: "Lato", sans-serif;
+  }
+
+  .divider-text{
+    font-family: "Lato", sans-serif;
+  }
 }
 
 /* * {
