@@ -35,7 +35,16 @@ const ClerkProviderWithRoutes = () => {
   const navigate = useNavigate();
 
   return (
-    <ClerkProvider publishableKey={pubKey} navigate={(to) => navigate(to)}>
+    <ClerkProvider appearance={{
+      elements: {
+        formButtonPrimary: "btn-login",
+        footer: "hide-footer",
+        headerTitle: "header-title",
+        headerSubtitle: "header-subtitle",
+        formFieldLabel: "email-form-field",
+        dividerText: "divider-text"
+      }
+  }}publishableKey={pubKey} navigate={(to) => navigate(to)}>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route
