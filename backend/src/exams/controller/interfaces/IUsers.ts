@@ -1,4 +1,4 @@
-export interface IUploadCSV {
+export interface IUsers {
   firstname: string;
   lastname: string;
   password: string;
