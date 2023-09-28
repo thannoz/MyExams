@@ -23,6 +23,7 @@ import Messages from "../pages/Messages";
 import Notifications from "../pages/Notifications";
 import ComposeContext from "../context/Compose.context";
 import { rootContext } from "../context/root.context";
+import Upload from "../pages/Upload";
 
 const queryClient = new QueryClient();
 const pubKey = import.meta.env.VITE_REACT_APP_CLERK_PUBLISHABLE_KEY;
@@ -35,16 +36,20 @@ const ClerkProviderWithRoutes = () => {
   const navigate = useNavigate();
 
   return (
-    <ClerkProvider appearance={{
-      elements: {
-        formButtonPrimary: "btn-login",
-        footer: "hide-footer",
-        headerTitle: "header-title",
-        headerSubtitle: "header-subtitle",
-        formFieldLabel: "email-form-field",
-        dividerText: "divider-text"
-      }
-  }}publishableKey={pubKey} navigate={(to) => navigate(to)}>
+    <ClerkProvider
+      appearance={{
+        elements: {
+          formButtonPrimary: "btn-login",
+          footer: "hide-footer",
+          headerTitle: "header-title",
+          headerSubtitle: "header-subtitle",
+          formFieldLabel: "email-form-field",
+          dividerText: "divider-text",
+        },
+      }}
+      publishableKey={pubKey}
+      navigate={(to) => navigate(to)}
+    >
       <Routes>
         <Route path="/" element={<Home />} />
         <Route
@@ -107,6 +112,19 @@ const ClerkProviderWithRoutes = () => {
             <>
               <SignedIn>
                 <Notifications />
+              </SignedIn>
+              <SignedOut>
+                <Home />
+              </SignedOut>
+            </>
+          }
+        />
+        <Route
+          path="/upload"
+          element={
+            <>
+              <SignedIn>
+                <Upload />
               </SignedIn>
               <SignedOut>
                 <Home />

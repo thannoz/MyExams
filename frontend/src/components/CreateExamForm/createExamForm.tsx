@@ -12,23 +12,16 @@ import { sendApiRequest } from "./../../helpers/sendApiRequest";
 import { Box, Button, Stack } from "@mui/material";
 import { Dayjs } from "dayjs";
 
-import { Grades } from "./enums/grades";
-import { Subjects } from "./enums/Subjects";
 import ExamSelectField from "./_examSelectField";
 import ExamTopicField from "./_examTopicField";
 import ExamDateField from "./_examDateField";
 import ExamTimeField from "./_examTimeField";
 import { StatusChangeContext } from "../../context";
-import {
-  IUpdateAPI,
-  IUpdateExam,
-} from "components/Exam/interfaces/IUpdateExam";
+import { IUpdateAPI } from "components/Exam/interfaces/IUpdateExam";
 import { ILoadSubjects } from "./interfaces/ILoadSubjetc";
 
 export const CreateExamForm: FC = (): ReactElement => {
   const [subject, setSubject] = useState<string>("");
-  const [id, setId] = useState<string>("");
-  const [subjects, setSubjects] = useState<string>("");
   const [grade, setGrade] = useState<string>("");
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<Dayjs | null>(null);
@@ -111,6 +104,8 @@ export const CreateExamForm: FC = (): ReactElement => {
       id: "",
     });
   };
+
+  // updateExamHandler();
 
   useEffect(() => {
     if (createExamMutation.isSuccess) {

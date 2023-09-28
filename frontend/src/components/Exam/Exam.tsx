@@ -1,5 +1,7 @@
-import { Box } from "@mui/material";
 import { FC, ReactElement } from "react";
+import { Box } from "@mui/material";
+import { useUser } from "@clerk/clerk-react";
+
 import { ExamHeader } from "./_examHeader";
 import { ExamTimeDate } from "./_examTimeDate";
 import { ExamTopic } from "./_examTopic";
@@ -7,6 +9,7 @@ import { ExamFooter } from "./_examFooter";
 import { IExam } from "./interfaces/IExam";
 
 export const Exam: FC<IExam> = (props): ReactElement => {
+  const user = useUser();
   // console.log("props in Exam:", props);
   // send onChange event here
   const {
@@ -43,11 +46,14 @@ export const Exam: FC<IExam> = (props): ReactElement => {
       <ExamHeader subject={subject} grade={grade} />
       <ExamTimeDate examDate={examDate} examTime={examTime} />
       <ExamTopic topic={topic} />
-      <ExamFooter
-        id={id}
-        onUpdateExamHandler={onUpdateExamHandler}
-        onDeleteExamHandler={onDeleteExamHandler}
-      />
+      {/* user with role of student should not be able to delete or edit exams */}
+      {user.user?.publicMetadata.role === "student" ? null : (
+        <ExamFooter
+          id={id}
+          onUpdateExamHandler={onUpdateExamHandler}
+          onDeleteExamHandler={onDeleteExamHandler}
+        />
+      )}
     </Box>
   );
 };
