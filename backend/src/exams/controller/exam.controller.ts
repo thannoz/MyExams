@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient({});
+const prisma = new PrismaClient();
 
 class ExamController {
   public async getAllGrades(req: Request, res: Response): Promise<Response> {

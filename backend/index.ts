@@ -9,7 +9,7 @@ import { userRouter } from "./src/exams/routes/user.routes";
 dotenv.config();
 
 const port = process.env.PORT;
-const app: Express = express();
+export const app: Express = express();
 
 app.use(bodyParser.json());
 app.use(cors());
