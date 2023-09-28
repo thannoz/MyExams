@@ -3,7 +3,10 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+// controller class for exam logic
+
 class ExamController {
+  // getAllGrades fetches all grades db
   public async getAllGrades(req: Request, res: Response): Promise<Response> {
     try {
       const grades = await prisma.grade.findMany();
@@ -14,6 +17,7 @@ class ExamController {
     }
   }
 
+  // getAllSubjects fetches all subjects from db
   public async getAllSubjects(req: Request, res: Response): Promise<Response> {
     try {
       const subjects = await prisma.subject.findMany();
@@ -25,6 +29,7 @@ class ExamController {
     }
   }
 
+  // getAll fetches all exams from db
   public async getAll(req: Request, res: Response): Promise<Response> {
     try {
       const allExams = await prisma.exam.findMany();
@@ -37,6 +42,7 @@ class ExamController {
     }
   }
 
+  // create creates a new exam
   public async create(req: Request, res: Response): Promise<Response> {
     try {
       const exam = await prisma.exam.create({ data: req.body });
@@ -49,6 +55,7 @@ class ExamController {
     }
   }
 
+  // update updates an exam
   public async update(req: Request, res: Response): Promise<Response> {
     const id = req.params.id;
     console.log(`Updating ${id}`);
@@ -75,6 +82,7 @@ class ExamController {
     }
   }
 
+  // remove delete an exam
   public async remove(req: Request, res: Response): Promise<Response> {
     const id = req.params.id;
     console.log(`Removing ${id}`);

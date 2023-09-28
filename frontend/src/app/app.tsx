@@ -31,7 +31,9 @@ const pubKey = import.meta.env.VITE_REACT_APP_CLERK_PUBLISHABLE_KEY;
 if (!pubKey) {
   throw new Error("Missing Publishable Key");
 }
-
+// Routes definition with React-Router
+// We also incorporated Clerk into our application to get their
+// authentication features
 const ClerkProviderWithRoutes = () => {
   const navigate = useNavigate();
 

@@ -1,14 +1,10 @@
 import { Request, Response } from "express";
-// import fs from "fs";
-// import { PrismaClient } from "@prisma/client";
-// import { useUser } from "@clerk/clerk-react";
 import { IUsers } from "./interfaces/IUsers";
 import clerkClient from "@clerk/clerk-sdk-node";
 
-// const prisma = new PrismaClient();
-
 class UserController {
-  // Create teacher in Clerk
+  // createUser gets parsed users from the csv file and insert them
+  // into the the Clerk platform. This user will become teachers
   public async createUser(req: Request, res: Response): Promise<Response> {
     try {
       const clientUsers: IUsers[] = await req.body;
@@ -21,8 +17,8 @@ class UserController {
           publicMetadata: { role: "teacher" },
         });
       });
-      // incrypt password??
-      console.log(clientUsers.length, " teachers created successfully");
+
+      // console.log(clientUsers.length, " teachers created successfully");
       return res.json(clientUsers);
     } catch (error) {
       return res

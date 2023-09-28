@@ -49,7 +49,7 @@ export const CreateExamForm: FC = (): ReactElement => {
     );
   });
 
-  // create exam mutation
+  // create exam mutation mutation
   const createExamMutation = useMutation((data: ICreateExam) =>
     sendApiRequest<ICreateExam>("http://localhost:3200/exams", "POST", data)
   );
@@ -80,7 +80,7 @@ export const CreateExamForm: FC = (): ReactElement => {
     };
 
     createExamMutation.mutate(exam);
-    console.log("The created exam: ", exam);
+    // console.log("The created exam: ", exam);
     setSubject("");
     setGrade("");
     setSelectedDate(null);
@@ -88,6 +88,7 @@ export const CreateExamForm: FC = (): ReactElement => {
     setTopic("");
   };
 
+  // update exam had issues...
   const updateExamHandler = () => {
     const exam: ICreateExam = {
       clerkUserID: teacher.user?.id!,
@@ -98,14 +99,12 @@ export const CreateExamForm: FC = (): ReactElement => {
       topic,
       createdAt: new Date().toString(),
     };
-    console.log("obj to update: ", exam);
+    // console.log("obj to update: ", exam);
     updateExamMutation.mutate({
       ...exam,
       id: "",
     });
   };
-
-  // updateExamHandler();
 
   useEffect(() => {
     if (createExamMutation.isSuccess) {
@@ -118,6 +117,7 @@ export const CreateExamForm: FC = (): ReactElement => {
       setShowSuccess(false);
     }, 5000);
 
+    // After 5 seconds we delete the alert message
     return () => {
       clearTimeout(successTimeout);
     };

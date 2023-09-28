@@ -47,8 +47,6 @@ const ExamArea: FC<SearchProps> = ({ searchValue }): ReactElement => {
     );
   });
 
-  // console.log("api data:", data);
-
   //update exam mutation
   const updateExamMutation = useMutation((data: IUpdateExam) =>
     sendApiRequest(`http://localhost:3200/exams/${data.id}`, "PUT", data)

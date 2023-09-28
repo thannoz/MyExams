@@ -4,6 +4,7 @@ import { examController } from "../controller/exam.controller";
 
 export const examsRouter: Router = Router();
 
+// api routes definition
 examsRouter.get("/exams", examController.getAll);
 examsRouter.post("/exams", examController.create);
 examsRouter.put("/exams/:id", examController.update);

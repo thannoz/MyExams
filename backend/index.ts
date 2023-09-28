@@ -4,6 +4,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import mysql from "mysql2";
 
+// import routes for exams and user
 import { examsRouter } from "./src/exams/routes/exam.routes";
 import { userRouter } from "./src/exams/routes/user.routes";
 dotenv.config();
@@ -17,7 +18,7 @@ app.use(cors());
 app.use(examsRouter);
 app.use(userRouter);
 
-// DB connection
+// DB connection to planetscale
 const connection = mysql.createConnection(process.env.DATABASE_URL!);
 console.log("Connected to PlanetScale Database!");
 

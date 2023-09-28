@@ -10,8 +10,6 @@ import { IExam } from "./interfaces/IExam";
 
 export const Exam: FC<IExam> = (props): ReactElement => {
   const user = useUser();
-  // console.log("props in Exam:", props);
-  // send onChange event here
   const {
     subject = "Test subject",
     grade = "Test grade",
@@ -26,7 +24,7 @@ export const Exam: FC<IExam> = (props): ReactElement => {
       console.log(e);
     },
   } = props;
-  // dummy click handler
+
   return (
     <Box
       display="flex"
